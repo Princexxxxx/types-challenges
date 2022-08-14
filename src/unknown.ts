@@ -14,10 +14,19 @@ let b: unknown;
 b = a; // ok
 
 // let c: string = a; // Error, 不能将类型“unknown”分配给类型“string”
-// a(); // Error, 对象的类型为 "unknown"
+// a(); // ⚠️⚠️ Error, 对象的类型为 "unknown"
 
-const Foo2 = (str: unknown) => {
-    return str;
+// 对unknown变量执行操作，「类型断言」 or「类型收窄」
+const Foo2 = (param: unknown) => {
+    if (typeof param === 'string') {
+        return param.replace(/\s/g, '');
+    } else if (typeof param === 'number') {
+        return param.toFixed();
+    } else if (typeof param === 'function') {
+        return param();
+    }
+
+    throw new Error('param type error');
 };
 
 const msg = Foo2('abc');

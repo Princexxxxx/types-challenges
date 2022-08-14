@@ -50,3 +50,5 @@ export type B2 = ('key1' extends 'key2' ? never : 'key1') | ('key2' extends 'key
 // =>
 // never是所有类型的子类型
 export type B3 = 'key1' | never;
+
+export type T4 = Exclude<'a' | 'b', 'a'>;
